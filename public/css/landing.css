@@ -1,0 +1,46 @@
+.facebook {
+	background-color: #3b5998;
+}
+
+.facebook:hover {
+	background-color: #334f8a;
+}
+
+#homeHeading {
+	font-size: 2em;
+}
+
+@media (min-width:768px){
+	#homeHeading {	
+		font-size: 3em;	
+		margin-top: 3em;
+	}
+}
+
+.logo img, .logotop img{
+	height: 1.5em;
+}
+
+.logo{
+	display: none;
+	height: 1.5em;
+}
+
+
+@media (min-width:768px){
+	.affix-top .logotop{
+		display: none;
+	}
+	.affix-top .logo{
+		display: inline;
+	}
+}
+
+.login{
+	padding: 0.5em 1em;
+	margin: 0.25em;
+}
+
+.find{
+	color: rgba(255,255,255,.7);
+}

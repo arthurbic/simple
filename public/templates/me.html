@@ -1,0 +1,154 @@
+<div class="wrapper">
+	<nav class="navigation">
+		<div class="mw group">
+			<div class="float-left navSingleTitle">
+				<h2>{{user.displayName}}</h2>
+			</div> <!--float-left-->
+			<div class="float-right">
+			<a class="dropdown">
+				<a href="" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					<span class="glyphicon glyphicon-option-vertical navbutton"></span>
+					<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+					    <li><a href="/logout">Log out</a></li>
+					</ul>
+				</a>
+			</a>
+			</div> <!--float-right-->
+		</div> <!--mw group-->
+	</nav> <!--navigation-->
+	<div class="profile-header group">
+		<div class="mw parent">
+			<div class="profile-pic float-left" style='background-image: url({{user.pictureUrl}})'></div>
+			<div class="profile-data float-right">
+				<ul>
+					<li><a><span class="glyphicon glyphicon-pushpin"></span>{{userItemCount()}}</a></li>
+					<li><a href="" data-toggle="modal" data-target="#listOfUsers" ng-click="selectListOfUsers(user.following); listOfUsers.Title = user.displayName + ' following'"><span class="glyphicon glyphicon-user"></span> {{user.following.length}}</a></li>
+					<li><a href="" data-toggle="modal" data-target="#listOfUsers" ng-click="selectListOfUsers(user.followers); listOfUsers.Title = user.displayName + '\'s followers'"><span class="fa fa-rss" aria-hidden="true"></span> {{user.followers.length}}</a></li>
+				</ul>
+				<button ng-show="user.isAdmin" class="follow-btn btn btn-success" data-toggle="modal" data-target="#newList" ng-click="loadNewList()"><span class="glyphicon glyphicon-plus"></span> New List</button>
+			</div> <!--profile-data-->
+  		</div> <!--mw-->
+	</div> <!--profile-header-->
+	<div class="profile-nav">
+		<div class="mw">
+			<ul>
+				<li ng-class="{'on': interface.lists}"><a href="" ng-click="go.loadLists()"><span class="glyphicon glyphicon-th-large"></span></a></li>
+				<li ng-class="{'on': interface.meFacts}"><a href="" ng-click="go.loadMeFacts()"><span class="glyphicon glyphicon-th-list"></span></a></li>
+				<li ng-class="{'on': interface.notifications}"><a href="" ng-click="go.loadNotifications()"><span class="glyphicon glyphicon-heart-empty"></span><span class="badge" ng-hide="user.notifications.unread.length == 0">{{user.notifications.unread.length}}</span></a></li>
+			</ul>				
+		</div>
+	</div>
+	<div class="mw overfixed" ng-show="interface.lists">
+		<ul class="userlists">
+			<li ng-repeat="list in user.lists | orderBy: '-dateOfChange'"  ng-show="list.items[0] || list.type == 'recommendation' || list.type == 'custom'" class="userlist" style="background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.5)), #54575a url({{list.items[0].Poster}}) no-repeat center /cover"><a href="" ui-sref="listContent({listId: list._id})"><h2>{{list.name}}</h2></a></li>
+		</ul>
+	</div> <!--mw-->
+	<div class="mw overfixed" ng-show="interface.notifications">
+		<ul class="notification-list">
+			<li ng-repeat="notification in user.notifications.unread">
+				<a ng-show="notification.type === 'follow'" href="" ui-sref="profile({id:notification.user._id})">
+					<div class="notification-box" ng-show="notification.type === 'follow'">
+						<div class="notification-profile-pic" style='background-image: url({{notification.user.pictureUrl}})'></div>
+						<div class="notification-data">
+							<p><strong>{{notification.user.displayName}}</strong> started following you. <a ng-show="notification.type === 'follow'" class="itemTime">{{notification.time | date : 'short' }}</a></p>
+						</div> <!--message-data-->
+					</div>
+				</a>
+<!-- 				<a ng-show="notification.type === 'like'" href="" ng-click="loadSingleFact(notification.fact._id)"> -->
+				<a ng-show="notification.type === 'like'" href="" ui-sref="fact({id:notification.fact._id})">
+					<div class="notification-box" ng-show="notification.type === 'like'">
+						<div class="notification-profile-pic" style='background-image: url({{notification.user.pictureUrl}})'></div>
+						<div class="notification-data">
+							<p><strong>{{notification.user.displayName}}</strong> liked your recommendation. <a  ng-show="notification.type === 'like'" class="itemTime">{{notification.time | date : 'short' }}</a></p>
+						</div> <!--message-data-->
+						<div class="notificationImage" style="background: url({{notification.fact.item.Poster}}) no-repeat center /cover;"> </div>
+					</div>
+				</a>
+				<a ng-show="notification.type === 'comment'" href="" ui-sref="fact({id:notification.fact._id})">
+					<div class="notification-box" ng-show="notification.type === 'comment'">
+						<div class="notification-profile-pic" style='background-image: url({{notification.user.pictureUrl}})'></div>
+						<div class="notification-data">
+							<p><strong>{{notification.user.displayName}}</strong> commented on your recommendation. <a  ng-show="notification.type === 'comment'" class="itemTime">{{notification.time | date : 'short' }}</a></p>
+						</div> <!--message-data-->
+						<div class="notificationImage" style="background: url({{notification.fact.item.Poster}}) no-repeat center /cover;"> </div>
+					</div>
+				</a>
+			</li>
+			<li ng-repeat="notification in user.notifications.reading">
+				<a ng-show="notification.type === 'follow'" href="" ui-sref="profile({id:notification.user._id})">
+					<div class="notification-box" ng-show="notification.type === 'follow'">
+						<div class="notification-profile-pic" style='background-image: url({{notification.user.pictureUrl}})'></div>
+						<div class="notification-data">
+							<p><strong>{{notification.user.displayName}}</strong> started following you. <a  ng-show="notification.type === 'follow'" class="itemTime">{{notification.time | date : 'short' }}</a></p>
+						</div> <!--message-data-->
+					</div>
+				</a>
+				<a ng-show="notification.type === 'like'" href="" ui-sref="fact({id:notification.fact._id})">
+					<div class="notification-box" ng-show="notification.type === 'like'">
+						<div class="notification-profile-pic" style='background-image: url({{notification.user.pictureUrl}})'></div>
+						<div class="notification-data">
+							<p><strong>{{notification.user.displayName}}</strong> liked your recommendation. <a  ng-show="notification.type === 'like'" class="itemTime">{{notification.time | date : 'short' }}</a></p>
+						</div> <!--message-data-->
+						<div class="notificationImage" style="background: url({{notification.fact.item.Poster}}) no-repeat center /cover;"> </div>
+					</div>
+				</a>
+				<a ng-show="notification.type === 'comment'" href="" ui-sref="fact({id:notification.fact._id})">
+					<div class="notification-box" ng-show="notification.type === 'comment'">
+						<div class="notification-profile-pic" style='background-image: url({{notification.user.pictureUrl}})'></div>
+						<div class="notification-data">
+							<p><strong>{{notification.user.displayName}}</strong> commented on your recommendation. <a  ng-show="notification.type === 'comment'" class="itemTime">{{notification.time | date : 'short' }}</a></p>
+						</div> <!--message-data-->
+						<div class="notificationImage" style="background: url({{notification.fact.item.Poster}}) no-repeat center /cover;"> </div>
+					</div>
+				</a>
+			</li>				
+			<li ng-repeat="notification in user.notifications.read | orderBy: '-time'" class="read">
+				<a ng-show="notification.type === 'follow'" href="" ui-sref="profile({id:notification.user._id})">
+					<div class="notification-box" ng-show="notification.type === 'follow'">
+						<div class="notification-profile-pic" style='background-image: url({{notification.user.pictureUrl}})'></div>
+						<div class="notification-data">
+							<p><strong>{{notification.user.displayName}}</strong> started following you. <a  ng-show="notification.type === 'follow'" class="itemTime">{{notification.time | date : 'short' }}</a></p>
+						</div> <!--message-data-->
+					</div>
+				</a>
+				<a ng-show="notification.type === 'like'" href="" ui-sref="fact({id:notification.fact._id})">
+					<div class="notification-box" ng-show="notification.type === 'like'">
+						<div class="notification-profile-pic" style='background-image: url({{notification.user.pictureUrl}})'></div>
+						<div class="notification-data">
+							<p><strong>{{notification.user.displayName}}</strong> liked your recommendation. <a ng-show="notification.type === 'like'" class="itemTime">{{notification.time | date : 'short' }}</a></p>
+						</div> <!--message-data-->
+						<div class="notificationImage" style="background: url({{notification.fact.item.Poster}}) no-repeat center /cover;"> </div>
+					</div>
+				</a>
+				<a ng-show="notification.type === 'comment'" href="" ui-sref="fact({id:notification.fact._id})">
+					<div class="notification-box" ng-show="notification.type === 'comment'">
+						<div class="notification-profile-pic" style='background-image: url({{notification.user.pictureUrl}})'></div>
+						<div class="notification-data">
+							<p><strong>{{notification.user.displayName}}</strong> commented on your recommendation. <a  ng-show="notification.type === 'comment'" class="itemTime">{{notification.time | date : 'short' }}</a></p>
+						</div> <!--message-data-->
+						<div class="notificationImage" style="background: url({{notification.fact.item.Poster}}) no-repeat center /cover;"> </div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div> <!--mw-->
+	<div class="mw overfixed" ng-show="interface.meFacts">
+		<ul>
+			<li ng-repeat="fact in user.facts" class="feeditem">
+			<fact></fact>
+			</li>
+		</ul>
+		<button class="btn btn-primary loadMoreBtn" ng-click="loadUserFacts(user._id, user.facts[user.facts.length-1].time)">Load more</button>
+	</div> <!--mw-->
+</div> <!--wrapper-->
+<footer class="foot-menu">
+  <nav class="mw">
+    <ul>
+      <li><a href="" ui-sref="feed"><span class="glyphicon glyphicon-home"></span></a></li>
+      <li><a href="" ui-sref="search"><span class="glyphicon glyphicon-search"></span></a></li>
+      <li><a href="" ui-sref="spreadyLists"><span><img src="img/s-i.png" class="s-i"/></span></a></li>
+<!--       <li><a href="" ng-click="go.loadMessages(); loadUserFriends()" ng-class="{'foot-selected': interface.messages}"><span class="glyphicon glyphicon-envelope"></span></a></li> -->
+      <li><a href="" ui-sref="me" class="foot-selected"><span class="glyphicon glyphicon-user"></span><span ng-hide="user.notifications.unread.length == 0" class="badge">{{user.notifications.unread.length}}</span></a></li>
+    </ul>
+  </nav>
+</footer>

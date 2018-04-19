@@ -1,0 +1,26 @@
+<div class="modal fade" id="listOfUsers" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+	    <div class="modal-content">
+			<div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			    <h4 class="modal-title" id="myModalLabel">{{listOfUsers.Title}}</h4>
+			</div>
+			<div class="modal-body">
+					<ul class="message-list">
+						<li ng-repeat="person in listOfUsers.users">
+							<a href="" data-dismiss="modal" ng-show="person._id != user._id" ui-sref="profile({id:person._id})">
+								<div class="group">
+									<user-box></user-box>
+								</div>
+							</a>
+							<a href="" data-dismiss="modal" ng-show="person._id === user._id" ui-sref="me">
+								<div class="group">
+									<user-box></user-box>
+								</div>
+							</a>
+						</li>
+					</ul>
+			</div>
+		</div>
+  	</div>
+</div>

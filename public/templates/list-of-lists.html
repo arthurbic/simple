@@ -1,0 +1,21 @@
+<div class="modal fade" id="listOfLists" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+	    <div class="modal-content">
+			<div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			    <h4 class="modal-title" id="myModalLabel">Lists with {{item.Title}}</h4>
+			</div>
+			<div class="modal-body">
+					<ul class="message-list">
+						<li ng-repeat="list in listOfLists"><a href="" data-dismiss="modal" ui-sref="listContent({listId: list._id})"><div class="group">
+							<div class="contact-pic float-left" style='background-image: url({{list.user[0].pictureUrl}})'></div>
+							<div class="message-data float-left">
+								<h3>{{list.name}}</h3>
+								<p>by {{list.user[0].displayName}}</p>
+							</div> <!--message-data-->
+						</div></a></li>
+					</ul>
+			</div>
+		</div>
+  	</div>
+</div>

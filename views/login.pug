@@ -1,0 +1,149 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Spready | Movies and series recommendations from people you love
+    // Bootstrap Core CSS
+    link(href='vendor/bootstrap/css/bootstrap.min.css', rel='stylesheet')
+    // Custom Fonts
+    link(href='vendor/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic', rel='stylesheet', type='text/css')
+    // Plugin CSS
+    link(href='vendor/magnific-popup/magnific-popup.css', rel='stylesheet')
+    // Theme CSS
+    link(href='css/creative.min.css', rel='stylesheet')
+    link(href='css/landing.css', rel='stylesheet')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    link(rel='apple-touch-icon', sizes='57x57', href='/apple-icon-57x57.png')
+    link(rel='apple-touch-icon', sizes='60x60', href='/apple-icon-60x60.png')
+    link(rel='apple-touch-icon', sizes='72x72', href='/apple-icon-72x72.png')
+    link(rel='apple-touch-icon', sizes='76x76', href='/apple-icon-76x76.png')
+    link(rel='apple-touch-icon', sizes='114x114', href='/apple-icon-114x114.png')
+    link(rel='apple-touch-icon', sizes='120x120', href='/apple-icon-120x120.png')
+    link(rel='apple-touch-icon', sizes='144x144', href='/apple-icon-144x144.png')
+    link(rel='apple-touch-icon', sizes='152x152', href='/apple-icon-152x152.png')
+    link(rel='apple-touch-icon', sizes='180x180', href='/apple-icon-180x180.png')
+    link(rel='icon', type='image/png', sizes='192x192', href='/android-icon-192x192.png')
+    link(rel='icon', type='image/png', sizes='32x32', href='/favicon-32x32.png')
+    link(rel='icon', type='image/png', sizes='96x96', href='/favicon-96x96.png')
+    link(rel='icon', type='image/png', sizes='16x16', href='/favicon-16x16.png')
+    link(rel='manifest', href='/manifest.json')
+    meta(name='msapplication-TileColor', content='#ffffff')
+    meta(name='msapplication-TileImage', content='/ms-icon-144x144.png')
+    meta(name='theme-color', content='#ffffff')
+  body#page-top
+    nav#mainNav.navbar.navbar-default.navbar-fixed-top
+      .container-fluid
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.sr-only Toggle navigation 
+            i.fa.fa-bars
+          a.navbar-brand.page-scroll.logo(href='#page-top')
+            img(src='img/logoinv.png')
+          a.navbar-brand.page-scroll.logotop(href='#page-top')
+            img(src='img/logo.png')
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a.page-scroll(href='#about') About
+            li
+              a.page-scroll(href='#services') How it works
+            li
+              a(target='blank', href='privacypolicy.htm') Privacy Policy
+            //
+              <li>
+              <a class="page-scroll" href="#portfolio">Portfolio</a>
+              </li>
+              <li>
+              <a class="page-scroll" href="#contact">Contact</a>
+              </li>
+        // /.navbar-collapse
+      // /.container-fluid
+    header
+      .header-content
+        .header-content-inner
+          h1#homeHeading Life is too short to watch bad stuff
+          hr
+          p Find out which movies and series your friends love.
+          a.btn.btn-danger.login(href='/auth/google')
+            span.fa.fa-google-plus
+            |  Connect with Google
+          a.btn.btn-primary.facebook.login(href='/auth/facebook')
+            span.fa.fa-facebook
+            |  Connect with Facebook
+          br
+          br
+          br
+          br
+          br
+          br
+          a.btn.btn-xl.page-scroll.find(href='#about')
+            | Find Out More
+            br
+            span.glyphicon.glyphicon-chevron-down
+    section#about.bg-primary
+      .container
+        .row
+          .col-lg-8.col-lg-offset-2.text-center
+            h2.section-heading True recommendations come from people we love!
+            hr.light
+            p.text-faded
+              | How many conversations end up with that excited buddy telling all about that must-see show? But what was its name again?
+            p.text-faded
+              strong Spready
+              |  helps you keep track of whatever you've watched or want to watch and poke around what everyone else likes. Enjoy the show!
+            a.page-scroll.btn.btn-default.btn-xl.sr-button(href='#services') Ok, but how?
+    section#services
+      .container
+        .row
+          .col-lg-12.text-center
+            h2.section-heading Easy & Pretty
+            hr.primary
+      .container
+        .row
+          .col-lg-3.col-md-6.text-center
+            .service-box
+              i.fa-4x.glyphicon.glyphicon-pushpin.text-primary.sr-icons
+              h3 Pin to your lists
+              p.text-muted Create lists and easily add your favorite movies and TV shows.
+          .col-lg-3.col-md-6.text-center
+            .service-box
+              i.fa.fa-4x.fa-paper-plane.text-primary.sr-icons
+              h3 Forward easily
+              p.text-muted Share recommendations just like you do with your pictures.
+          .col-lg-3.col-md-6.text-center
+            .service-box
+              i.fa.fa-4x.fa-heart.text-primary.sr-icons
+              h3 Interact with others
+              p.text-muted Like and comment on your friend's recommendations.
+          .col-lg-3.col-md-6.text-center
+            .service-box
+              i.fa-4x.glyphicon.glyphicon-eye-open.text-primary.sr-icons
+              h3 Define your privacy
+              p.text-muted No need to give away all your secrets.
+        br
+        br
+        br
+        .row.text-center
+          a.btn.btn-primary.btn-xl.page-scroll(href='#page-top') Get Started
+    // jQuery
+    script(src='vendor/jquery/jquery.min.js')
+    // Bootstrap Core JavaScript
+    script(src='vendor/bootstrap/js/bootstrap.min.js')
+    // Plugin JavaScript
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js')
+    script(src='vendor/scrollreveal/scrollreveal.min.js')
+    script(src='vendor/magnific-popup/jquery.magnific-popup.min.js')
+    // Theme JavaScript
+    script(src='scripts/creative.min.js')
